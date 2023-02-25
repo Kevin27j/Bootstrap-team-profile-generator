@@ -16,7 +16,7 @@ console.log("Please build your team");
 
 inquirer
     .prompt([
-        // add manager information for starter
+        // start programm by prompting manager information 
         {
             type: "input",
             name: "name",
@@ -38,7 +38,7 @@ inquirer
             message: "What is the team manager's office number?"
         }
     ]).then(response => {
-
+        promptChoice();
     })
 
 const promptChoice = () => {
@@ -46,14 +46,20 @@ const promptChoice = () => {
         .prompt([
             {
                 type: "list",
-                name: "id",
+                name: "teamList",
                 message: "Which type of team member would you like to add?",
                 choices: ["Engineer",
                     "Intern",
-                    "Don' want to add any more team members"]
+                    "Don't want to add any more team members"]
             }
         ]).then(response => {
-
+            if(response.teamList === "Engineer"){
+                promptEngineer();
+            } else if(response.teamList === "Intern"){
+                promptIntern()
+            } else {
+                return;
+            }
         })
 }
 
@@ -81,7 +87,7 @@ const promptEngineer = () => {
                 message: "What is your engineer's GitHub username?"
             },
         ]).then(response => {
-
+            promptChoice();
         })
 }
 
@@ -109,6 +115,6 @@ const promptIntern = () => {
                 message: "What is your intern's School?"
             },
         ]).then(response => {
-
+            promptChoice();
         })
 }
