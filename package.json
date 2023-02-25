@@ -1,0 +1,28 @@
+{
+  "name": "bootstrap-team-profile-generator",
+  "version": "1.0.0",
+  "description": "A CLI application to generate a team profile HTML page",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kevin27j/Bootstrap-team-profile-generator.git"
+  },
+  "author": "Kevin27j",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kevin27j/Bootstrap-team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/Kevin27j/Bootstrap-team-profile-generator#readme",
+  "devDependencies": {
+    "jest": "^29.4.3"
+  },
+  "dependencies": {
+    "inquirer": "^6.5.0"
+  }
+}
