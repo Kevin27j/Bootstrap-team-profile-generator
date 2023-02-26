@@ -1,11 +1,15 @@
+const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
+// The node:path module provides utilities for working with file and directory paths.
 const path = require("path");
 const fs = require("fs");
 
+// path.resolve() creates a new absolute path for the "output" directory
 const OUTPUT_DIR = path.resolve(__dirname, "output");
+// path.join() attaches a new file "team.html" to the previous path
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
@@ -37,7 +41,12 @@ inquirer
             name: "officeNum",
             message: "What is the team manager's office number?"
         }
-    ]).then(response => {
+    ]).then(answers => {
+        // Populate manager 
+        // create object
+        const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNum);
+        console.log(manager);
+        
         promptChoice();
     })
 
@@ -52,13 +61,15 @@ const promptChoice = () => {
                     "Intern",
                     "Don't want to add any more team members"]
             }
-        ]).then(response => {
-            if(response.teamList === "Engineer"){
+        ]).then(answers => {
+            // call new prompt based on list choice
+            if (answers.teamList === "Engineer") {
                 promptEngineer();
-            } else if(response.teamList === "Intern"){
+            } else if (answers.teamList === "Intern") {
                 promptIntern()
             } else {
-                return;
+                // Else build HTML page
+                buildPage();
             }
         })
 }
@@ -86,7 +97,8 @@ const promptEngineer = () => {
                 name: "github",
                 message: "What is your engineer's GitHub username?"
             },
-        ]).then(response => {
+        ]).then(answers => {
+            // add new engineer to employees array
             promptChoice();
         })
 }
@@ -114,7 +126,12 @@ const promptIntern = () => {
                 name: "github",
                 message: "What is your intern's School?"
             },
-        ]).then(response => {
+        ]).then(answers => {
+            // add new intern to employees array
             promptChoice();
         })
+}
+
+const buildPage = () => {
+
 }
