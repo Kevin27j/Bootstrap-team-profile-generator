@@ -18,6 +18,9 @@ const render = require("./src/page-template.js");
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 console.log("Please build your team");
 
+// Array to pass with team objects to render()
+const employees = [];
+
 inquirer
     .prompt([
         // start programm by prompting manager information 
@@ -45,7 +48,7 @@ inquirer
         // Populate manager 
         // create object
         const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNum);
-        console.log(manager);
+        employees.push(manager);
         
         promptChoice();
     })
@@ -68,7 +71,7 @@ const promptChoice = () => {
             } else if (answers.teamList === "Intern") {
                 promptIntern()
             } else {
-                // Else build HTML page
+                // When a user decides to finish building their team, they exit the application and the HTML is generated.
                 buildPage();
             }
         })
@@ -99,6 +102,9 @@ const promptEngineer = () => {
             },
         ]).then(answers => {
             // add new engineer to employees array
+            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+            employees.push(engineer);
+
             promptChoice();
         })
 }
@@ -123,15 +129,20 @@ const promptIntern = () => {
             },
             {
                 type: "input",
-                name: "github",
-                message: "What is your intern's School?"
+                name: "school",
+                message: "What is your intern's school?"
             },
         ]).then(answers => {
             // add new intern to employees array
+            const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+            employees.push(intern);
+
             promptChoice();
         })
 }
 
 const buildPage = () => {
-
+    // Build HTML page with employees info
+     fs.writeFile(outputPath, render(employees), (err) =>
+     err ? console.error(err) : console.log('success'));
 }
