@@ -37,7 +37,7 @@ inquirer
         {
             type: "input",
             name: "email",
-            message: "What is the team manager's email?"
+            message: "What is the team manager's email?",
         },
         {
             type: "input",
@@ -46,10 +46,17 @@ inquirer
         }
     ]).then(answers => {
         // Populate manager 
-        // create object
-        const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNum);
+        // Create new object from Manager Class
+        const manager = new Manager(
+            // Use this function to capitalize first letter of each word
+            stringCapitalize(answers.name),
+            answers.id,
+            answers.email,
+            answers.officeNum
+        );
+
+        // Push new object information to employees array
         employees.push(manager);
-        
         promptChoice();
     })
 
@@ -71,7 +78,8 @@ const promptChoice = () => {
             } else if (answers.teamList === "Intern") {
                 promptIntern()
             } else {
-                // When a user decides to finish building their team, they exit the application and the HTML is generated.
+                // When a user decides to finish building their team, 
+                // they exit the application and the HTML is generated.
                 buildPage();
             }
         })
@@ -102,7 +110,12 @@ const promptEngineer = () => {
             },
         ]).then(answers => {
             // add new engineer to employees array
-            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+            const engineer = new Engineer(
+                stringCapitalize(answers.name),
+                answers.id,
+                answers.email,
+                answers.github
+            );
             employees.push(engineer);
 
             promptChoice();
@@ -134,15 +147,30 @@ const promptIntern = () => {
             },
         ]).then(answers => {
             // add new intern to employees array
-            const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+            const intern = new Intern(
+                stringCapitalize(answers.name),
+                answers.id,
+                answers.email,
+                answers.school
+            );
             employees.push(intern);
 
             promptChoice();
         })
 }
 
+// Function to capitalize first letter to each word
+// https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
+const stringCapitalize = (str) => {
+    return str
+        .toLowerCase()
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+};
+
 const buildPage = () => {
     // Build HTML page with employees info
-     fs.writeFile(outputPath, render(employees), (err) =>
-     err ? console.error(err) : console.log('success'));
+    fs.writeFile(outputPath, render(employees), (err) =>
+        err ? console.error(err) : console.log('success'));
 }
