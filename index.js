@@ -21,9 +21,9 @@ console.log("Please build your team");
 // Array to pass with team objects to render()
 const employees = [];
 
+// Start program by prompting Manager information 
 inquirer
     .prompt([
-        // start programm by prompting manager information 
         {
             type: "input",
             name: "name",
@@ -38,6 +38,12 @@ inquirer
             type: "input",
             name: "email",
             message: "What is the team manager's email?",
+            // use validate method to check email input is correct
+            // source: https://stackoverflow.com/questions/65189877/how-can-i-validate-that-a-user-input-their-email-when-using-inquirer-npm
+            validate: function (email) {
+                // Regex mail check (return true if valid mail)
+                return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
+            }
         },
         {
             type: "input",
@@ -48,7 +54,7 @@ inquirer
         // Populate manager 
         // Create new object from Manager Class
         const manager = new Manager(
-            // Use this function to capitalize first letter of each word
+            // Use this function to capitalize first letter of each word in name input
             stringCapitalize(answers.name),
             answers.id,
             answers.email,
@@ -60,6 +66,7 @@ inquirer
         promptChoice();
     })
 
+// Prompt user to pick another employee or exit the program
 const promptChoice = () => {
     inquirer
         .prompt([
@@ -101,7 +108,11 @@ const promptEngineer = () => {
             {
                 type: "input",
                 name: "email",
-                message: "What is your engineer's email?"
+                message: "What is your engineer's email?",
+                validate: function (email) {
+                    // Regex mail check (return true if valid mail)
+                    return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
+                }
             },
             {
                 type: "input",
@@ -138,7 +149,11 @@ const promptIntern = () => {
             {
                 type: "input",
                 name: "email",
-                message: "What is your intern's email?"
+                message: "What is your intern's email?",
+                validate: function (email) {
+                    // Regex mail check (return true if valid mail)
+                    return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
+                }
             },
             {
                 type: "input",
@@ -159,7 +174,7 @@ const promptIntern = () => {
         })
 }
 
-// Function to capitalize first letter to each word
+// Function to capitalize first letter of each word, source:
 // https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
 const stringCapitalize = (str) => {
     return str
