@@ -30,7 +30,7 @@ inquirer
             message: "What is the team manager's name?"
         },
         {
-            type: "input",
+            type: "number",
             name: "id",
             message: "What is the team manager's id?"
         },
@@ -46,7 +46,7 @@ inquirer
             }
         },
         {
-            type: "input",
+            type: "number",
             name: "officeNum",
             message: "What is the team manager's office number?"
         }
@@ -101,7 +101,7 @@ const promptEngineer = () => {
                 message: "What is your engineer's name?"
             },
             {
-                type: "input",
+                type: "number",
                 name: "id",
                 message: "What is your engineer's id?"
             },
@@ -142,7 +142,7 @@ const promptIntern = () => {
                 message: "What is your intern's name?"
             },
             {
-                type: "input",
+                type: "number",
                 name: "id",
                 message: "What is your intern's id?"
             },
