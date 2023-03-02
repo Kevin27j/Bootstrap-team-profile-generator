@@ -15,8 +15,8 @@ A CLI application to generate a team profile HTML page
   - [Usage](#usage)
   - [License](#license)
   - [Test](#test)
-  - [Author](#author)
   - [Sources](#sources)
+  - [Author](#author)
 
 ## Built with
 
@@ -51,10 +51,6 @@ To run tests, run the following command:
 npm test
 ```
 
-## Author
-
-[Kevin27j](https://github.com/Kevin27j)
-
 ## Sources
 
 - Inquirer validation method for emails (index.js/line43):
@@ -79,3 +75,6 @@ npm test
   ```
   [source](https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript)
 
+## Author
+
+[Kevin27j](https://github.com/Kevin27j)
