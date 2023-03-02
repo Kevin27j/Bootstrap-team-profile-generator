@@ -174,8 +174,8 @@ const promptIntern = () => {
         })
 }
 
-// Function to capitalize first letter of each word, source:
-// https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
+// Function to capitalize first letter of each word 
+// source: https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
 const stringCapitalize = (str) => {
     return str
         .toLowerCase()
